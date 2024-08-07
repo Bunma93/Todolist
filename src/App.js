@@ -1,17 +1,17 @@
 import './App.scss';
-import { FaHome } from 'react-icons/fa'
+import { Header } from './components/Header';
+import { Sidebar } from './components/Sidebar';
+
 function App() {
   return (
     <div className='container'>
-        <header className='header'>
-          <span> 
-              <FaHome /> 
-          </span>
-            <h3>CC-todolist</h3>
-        </header>
+        {/* Header */}
+        <Header/>
 
-        <aside className='sidebar'>Sidebar</aside>
+        {/* Sidebar */}
+        <Sidebar/>
 
+        {/* Main */}
         <main className='content'>content</main>
     </div>
   );
