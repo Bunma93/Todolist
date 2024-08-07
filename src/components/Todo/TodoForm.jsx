@@ -1,9 +1,12 @@
 import styles from './TodoForm.module.scss'
 import React, {useState} from 'react'
 
-export function TodoForm({onSetIsAddMode}) {
+//TodoForm => call in 2 Mode
+//Mode-1 : Add
+//Mode-2 : Edit
+export function TodoForm({onSetIsShowForm, submitText, oldTask}) {
     //Logic secion
-    const [task,SetTask] = useState('');
+    const [task,SetTask] = useState(oldTask || '');
     const [isError, setIsError] = useState(false);
     
     const handleSubmit = (e) => {
@@ -14,11 +17,14 @@ export function TodoForm({onSetIsAddMode}) {
             return;
         }
         //จบ Add-mode
-        onSetIsAddMode(false);
+        onSetIsShowForm(false);
     }
     const handleClickCancle = (e) => {
         console.log("Cancle")
-        onSetIsAddMode(false);
+        // onSetIsAddMode?.(false);
+        // onSetIsEditMode?.(false);
+
+        onSetIsShowForm(false);
     }
 
     const handleChangeInput = (e) => {
@@ -38,7 +44,7 @@ export function TodoForm({onSetIsAddMode}) {
             {isError &&<p className={styles.todo_error}>Task name is required</p>}
             <div className={styles.todo_form_buttons}>
                 <button type='button' onClick={handleClickCancle}>Cancle</button>
-                <button type="submit">Add task</button>
+                <button type="submit">{submitText}</button>
             </div>
         </div>
     </form>
