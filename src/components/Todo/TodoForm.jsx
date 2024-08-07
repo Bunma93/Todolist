@@ -4,9 +4,15 @@ import React, {useState} from 'react'
 export function TodoForm({onSetIsAddMode}) {
     //Logic secion
     const [task,SetTask] = useState('');
+    const [isError, setIsError] = useState(false);
     
     const handleSubmit = (e) => {
         e.preventDefault()
+        //validate
+        if(task.trim() === '') {
+            setIsError(true);
+            return;
+        }
         //จบ Add-mode
         onSetIsAddMode(false);
     }
@@ -18,6 +24,7 @@ export function TodoForm({onSetIsAddMode}) {
     const handleChangeInput = (e) => {
         console.log(e.target.value);
         SetTask(e.target.value);
+        setIsError(false);
     }
     //UI section
     return (
@@ -28,7 +35,7 @@ export function TodoForm({onSetIsAddMode}) {
             value={task} 
             onChange={handleChangeInput}/>
         <div className={styles.todo_form_footer}>
-            <p className={styles.todo_error}>Title is required</p>
+            {isError &&<p className={styles.todo_error}>Task name is required</p>}
             <div className={styles.todo_form_buttons}>
                 <button type='button' onClick={handleClickCancle}>Cancle</button>
                 <button type="submit">Add task</button>
