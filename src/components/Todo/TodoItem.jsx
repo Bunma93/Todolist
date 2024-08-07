@@ -3,9 +3,10 @@ import {useState} from "react"
 import {HiCheck, HiPencil, HiTrash} from 'react-icons/hi'
 import { TodoForm } from "./TodoForm"
 
-export function TodoItem({el}) {
+export function TodoItem({todo}) {
     //Logic
-    const [isCheck, setIsCheck] = useState(false);
+    //check === status Done
+    const [isCheck, setIsCheck] = useState(todo.status);
     const [isEdit, setIsEdit] = useState(false);
 
     const handleToggleCheck = () => {   
@@ -28,7 +29,7 @@ export function TodoItem({el}) {
                 <div className={styles.checkbox_container} onClick={handleToggleCheck}>
                     <HiCheck className={finalCheckboxStyle} />
                 </div>
-                <p className={taskStyle}>{`task`}</p>
+                <p className={taskStyle}>{todo.task}</p>
                 <div className={styles.edit_icon} onClick={handleopenEditMode}>
                     <HiPencil/>
                 </div>
