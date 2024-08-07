@@ -9,9 +9,9 @@ import mockData from '../../data/todos.json';
 export function TodoContent(){
     const [todos, setTodos] = useState(mockData);
 
-    const handleAddTodo = () => {
+    const handleAddTodo = (newTask) => {
         //มี new todo
-        let newTodoObj = {id:uuidv4(), task:"DoHW" ,status: false, due_date: ""}
+        let newTodoObj = {id:uuidv4(), task:newTask ,status: false, due_date: ""}
 
         //สร้าง state ใหม่ ต่อจากเดิม
         //ubdate  state by newState
@@ -24,8 +24,7 @@ export function TodoContent(){
     return (
     <main className='content'>
         <TodoHeader/>
-        <AddTodo/>
-        <button onClick={handleAddTodo}>testadd</button>
+        <AddTodo onAddToDo={handleAddTodo}/>
         <TodoList todos={todos}/>
     </main>
     );

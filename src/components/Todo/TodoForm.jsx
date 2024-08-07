@@ -4,7 +4,7 @@ import React, {useState} from 'react'
 //TodoForm => call in 2 Mode
 //Mode-1 : Add
 //Mode-2 : Edit
-export function TodoForm({onSetIsShowForm, submitText, oldTask}) {
+export function TodoForm({onSetIsShowForm, submitText, oldTask, onAddToDo}) {
     //Logic secion
     const [task,SetTask] = useState(oldTask || '');
     const [isError, setIsError] = useState(false);
@@ -15,6 +15,9 @@ export function TodoForm({onSetIsShowForm, submitText, oldTask}) {
         if(task.trim() === '') {
             setIsError(true);
             return;
+        } else {
+            //Validate ผ่าน excecute
+            onAddToDo(task) //from <TodoContent/>
         }
         //จบ Add-mode
         onSetIsShowForm(false);
