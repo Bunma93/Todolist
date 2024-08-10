@@ -1,5 +1,16 @@
 import styles from './TodoForm.module.scss'
 import React, {useState} from 'react'
+import PropTypes from 'prop-types';
+
+//เราจะส่งข้อมูลถูกต้องตามชนิด Debug Code ดีขึ้น
+//ถ้ามี isRequired คือจำเป็นต้องส่ง
+TodoForm.propTypes = {
+    submitText : PropTypes.string.isRequired,
+    onSetIsShowForm : PropTypes.func.isRequired,
+    onAddToDo : PropTypes.func,
+    onEditTodo : PropTypes.func,
+    todo : PropTypes.oneOfType([PropTypes.object,undefined]) //undifined, {id : number | string, task : string , status : boolean, due_date : string}
+}
 
 //TodoForm => call in 2 Mode
 //Mode-1 : Add
