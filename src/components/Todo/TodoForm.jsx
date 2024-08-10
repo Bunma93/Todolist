@@ -4,20 +4,25 @@ import React, {useState} from 'react'
 //TodoForm => call in 2 Mode
 //Mode-1 : Add
 //Mode-2 : Edit
-export function TodoForm({onSetIsShowForm, submitText, oldTask, onAddToDo}) {
+export function TodoForm({onSetIsShowForm, submitText, todo, onAddToDo, onEditTodo}) {
     //Logic secion
-    const [task,SetTask] = useState(oldTask || '');
+    const [task,SetTask] = useState(todo?.task || '');
     const [isError, setIsError] = useState(false);
     
     const handleSubmit = (e) => {
         e.preventDefault()
         //validate
+        //case 1 : notvalid
+        //case 2A : valid create
+        //casr 2B : valid update
         if(task.trim() === '') {
             setIsError(true);
             return;
         } else {
             //Validate ผ่าน excecute
-            onAddToDo(task) //from <TodoContent/>
+            // onAddToDo(task); //from <TodoContent/>
+            if (todo) onEditTodo(todo.id, {task});
+            else onAddToDo(task);
         }
         //จบ Add-mode
         onSetIsShowForm(false);

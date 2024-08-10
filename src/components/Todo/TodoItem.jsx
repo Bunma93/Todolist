@@ -3,23 +3,22 @@ import {useState} from "react"
 import {HiCheck, HiPencil, HiTrash} from 'react-icons/hi'
 import { TodoForm } from "./TodoForm"
 
-export function TodoItem({todo}) {
+export function TodoItem({todo,onEditTodo,onDeleteTodo}) {
     //Logic
     //check === status Done
-    const [isCheck, setIsCheck] = useState(todo.status);
     const [isEdit, setIsEdit] = useState(false);
 
     const handleToggleCheck = () => {   
-        setIsCheck(!isCheck)
+        onEditTodo(todo.id, {status:!todo.status}) //handleEditTOdo(todo.id,{status:!todo.status})
     }
     const handleopenEditMode = () => {
-        setIsEdit(true)
+        setIsEdit(true);
     }
     const handleDeleteTodo = () => {
-        console.log("delete");
+        onDeleteTodo(todo.id)
     }
-    let finalCheckboxStyle = isCheck ? styles.checkbox_icon_done: styles.checkbox_icon
-    let taskStyle = isCheck ? styles.done : ""
+    let finalCheckboxStyle = todo.status ? styles.checkbox_icon_done: styles.checkbox_icon
+    let taskStyle = todo.status ? styles.done : ""
     //Ui
 
     return (
@@ -41,7 +40,9 @@ export function TodoItem({todo}) {
             :<TodoForm 
             submitText='Edit Task' 
             onSetIsShowForm={setIsEdit}
-            oldTask="old-task-name"
+            // oldTask={todo.task}
+            onEditTodo={onEditTodo}
+            todo={todo}
             />
             }
         </>
