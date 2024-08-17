@@ -2,6 +2,7 @@ import styles from "./TodoItem.module.scss"
 import {useState} from "react"
 import {HiCheck, HiPencil, HiTrash} from 'react-icons/hi'
 import { TodoForm } from "./TodoForm"
+import { getFormattedDate } from "../utils/DateUtils"
 
 export function TodoItem({todo,onEditTodo,onDeleteTodo}) {
     //Logic
@@ -29,6 +30,7 @@ export function TodoItem({todo,onEditTodo,onDeleteTodo}) {
                     <HiCheck className={finalCheckboxStyle} />
                 </div>
                 <p className={taskStyle}>{todo.task}</p>
+                <span className={styles.date_text}>{getFormattedDate(todo.due_date)}</span>
                 <div className={styles.edit_icon} onClick={handleopenEditMode}>
                     <HiPencil/>
                 </div>

@@ -6,8 +6,8 @@ import { TodoList } from './TodoList';
 import mockData from '../../data/todos.json';
 
 
-export function TodoContent(){
-    const [todos, setTodos] = useState(mockData);
+export function TodoContent({todos, setTodos}){
+    // const [todos, setTodos] = useState(mockData);
     
     //ADD-TODO
     const handleAddTodo = (newTask) => {
